@@ -2,7 +2,7 @@ name: NLTS
 on: workflow_dispatch
 jobs:
   job_1:
-    runs-on: ubuntu-lates
+    runs-on: ubuntu-latest
     steps:
       - name: print greeting
         run: echo "Hello World"
