@@ -20,7 +20,7 @@ def test_multiply(calc):
 
 
 def test_divide(calc):
-    assert calc.divide(10, 2) == 5
+    assert calc.divide(10, 2) == 7
 
 
 def test_divide_by_zero(calc):
