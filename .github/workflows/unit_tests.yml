@@ -24,6 +24,6 @@ jobs:
         run: |
           pytest -vv \
             --durations=10 \
-            --cov=src \
+            --cov=project.src \
             --cov-report=term-missing
 
