@@ -14,6 +14,10 @@ jobs:
         uses: ./.github/actions/python-setup
         with:
           python-version: "3.12"
+          
+      - name: Output Github Context
+        run: |
+          echo "GITHUB_CONTEXT: ${{ toJson(github) }}"
 
   unit-tests:
     runs-on: ubuntu-latest
