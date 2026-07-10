@@ -8,25 +8,8 @@ on:
   workflow_dispatch:  
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Setup Python Environment
-        uses: ./.github/actions/python-setup
-        with:
-          python-version: "3.12"
-          
-      - name: Output Github Context
-        run: |
-          echo "GITHUB_CONTEXT: ${{ toJson(github) }}"
-
   unit-tests:
     runs-on: ubuntu-latest
-    needs: build
 
     steps:
       - name: Checkout Repository
@@ -43,9 +26,28 @@ jobs:
             --durations=10 \
             --cov=project.src \
             --cov-report=term-missing
-  deploy:
+
+  build:
     runs-on: ubuntu-latest
     needs: unit-tests
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python Environment
+        uses: ./.github/actions/python-setup
+        with:
+          python-version: "3.12"
+          
+      - name: Output Github Context
+        run: |
+          echo "GITHUB_CONTEXT: ${{ toJson(github) }}"
+
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
 
     steps:
       - name: Checkout Repository
