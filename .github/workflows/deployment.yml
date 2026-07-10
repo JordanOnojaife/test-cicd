@@ -45,6 +45,12 @@ jobs:
       - name: Output Github Context
         run: |
           echo "GITHUB_CONTEXT: ${{ toJson(github) }}"
+
+      - name: List Files
+        run: |
+          echo "Listing files in the project directory:"
+          ls -R project
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -63,6 +69,17 @@ jobs:
         uses: ./.github/actions/python-setup
         with:
           python-version: "3.12"
+
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+          path: project
+
+      - name: List Files
+        run: |
+          echo "Listing files in the project directory after downloading artifacts:"
+          ls -R project
 
       - name: Deploy Application
         run: |
